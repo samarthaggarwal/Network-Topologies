@@ -20,9 +20,10 @@
 """
 
 from mininet.net import Mininet
-from mininet.node import RemoteController, OVSSwitch
+from mininet.node import RemoteController, OVSSwitch, CPULimitedHost
 from mininet.cli import CLI
 from mininet.log import setLogLevel, info
+from mininet.link import TCLink
 
 def emptyNet():
 
@@ -33,8 +34,8 @@ def emptyNet():
     #######################################
     # Run mininet
     #######################################
-    net = Mininet( topo=None, build=False )
-
+    net = Mininet( topo=None, build=False, link=TCLink, host=CPULimitedHost )
+    
     info( '*** Adding controller\n' )
     net.addController('c0', controller=RemoteController,ip="127.0.0.1",port=6633)
     h0 = net.addHost('h0', ip='127.0.0.1')
