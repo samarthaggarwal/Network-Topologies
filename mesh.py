@@ -35,7 +35,7 @@ def emptyNet():
     # Run mininet
     #######################################
     net = Mininet( topo=None, build=False, link=TCLink, host=CPULimitedHost )
-    
+
     info( '*** Adding controller\n' )
     net.addController('c0', controller=RemoteController,ip="127.0.0.1",port=6633)
     h0 = net.addHost('h0', ip='127.0.0.1')
@@ -76,27 +76,28 @@ def emptyNet():
     info( '*** Creating links\n' )
     ## controller - switch (s4)
 #    net.addLink( h0, s4 )
-    net.addLink(h0,s11)
+    net.addLink(h0,s11, loss=5 )
 
     ## host - switch
 #    net.addLink( h1, s1 )
 #    net.addLink( h2, s3 )
-    net.addLink(h1,s1)
-    net.addLink(h2,s2)
-    net.addLink(h3,s3)
-    net.addLink(h4,s4)
-    net.addLink(h5,s5)
-    net.addLink(h6,s6)
-    net.addLink(h7,s7)
-    net.addLink(h8,s8)
-    net.addLink(h9,s9)
-    net.addLink(h10,s10)
+    # net.addLink(h1,s1, delay='7ms', loss=3, bw=150, max_queue_length=10 )
+    net.addLink(h1,s1, loss=5 )
+    net.addLink(h2,s2, loss=5 )
+    net.addLink(h3,s3, loss=5 )
+    net.addLink(h4,s4, loss=5 )
+    net.addLink(h5,s5, loss=5 )
+    net.addLink(h6,s6, loss=5 )
+    net.addLink(h7,s7, loss=5 )
+    net.addLink(h8,s8, loss=5 )
+    net.addLink(h9,s9, loss=5 )
+    net.addLink(h10,s10, loss=5 )
 
     ## switches
     switchList = (s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11)
     for index in range (0, len(switchList)):
       for index2 in range (index+1, len(switchList)):
-        net.addLink(switchList[index], switchList[index2])
+        net.addLink(switchList[index], switchList[index2], loss=5 )
 
     info( '*** Starting network\n')
     net.start()
