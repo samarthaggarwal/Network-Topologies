@@ -36,7 +36,7 @@ def emptyNet():
     net = Mininet( topo=None, build=False )
 
     info( '*** Adding controller\n' )
-    net.addController('c0', controller=RemoteController,ip="127.0.0.1",port=6633)
+    net.addController('c0', ip="127.0.0.1",port=6633)
     h0 = net.addHost('h0', ip='127.0.0.1')
     info( '*** Adding hosts\n' )
     h1 = net.addHost( 'h1', ip='10.0.2.1' )
@@ -102,7 +102,7 @@ def emptyNet():
     
 
     info('*** Enable spanning tree\n')
-    s1.cmd('ovs-vsctl set bridge switch1 stp-enable=true')
+    # s1.cmd('ovs-vsctl set bridge switch1 stp-enable=true')
     # s2.cmd('ovs-vsctl set bridge switch2 stp-enable=true')
     # s3.cmd('ovs-vsctl set bridge switch3 stp-enable=true')
     # s4.cmd('ovs-vsctl set bridge switch4 stp-enable=true')
